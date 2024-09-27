@@ -1,10 +1,8 @@
 package com.plcoding.ktorandroidchat.data.remote.dto
 
 import com.plcoding.ktorandroidchat.domain.model.Message
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
+import java.util.Date
 
 @Serializable
 data class MessageDto(
@@ -14,9 +12,8 @@ data class MessageDto(
     val id: String
 ) {
     fun toMessage(): Message {
-        val instant = Instant.fromEpochMilliseconds(timestamp)
-        val date = instant.toLocalDateTime(TimeZone.UTC).date
-        val formattedDate = "${date.year}-${date.month}-${date.dayOfMonth}"
+        val date = Date(timestamp)
+        val formattedDate = "${date.year}-${date.month}"
 
         return Message(
             text = text,
